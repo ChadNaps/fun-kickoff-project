@@ -21,6 +21,10 @@ yarn-error.log*
 
 
 #TODO add .env to your gitignore
+server/.env
+.prettierignore
+.prettierrc.json
+.idea/
 __snapshots__
 
 # debug & other vs code settings
