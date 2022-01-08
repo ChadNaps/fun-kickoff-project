@@ -10,7 +10,12 @@ const daySchema = new mongoose.Schema({
     type: Number,
     min: 0,
     max: 2359,
-  }
+    validate: [
+      function (value) {
+        return this.from <= value;
+      },
+    ],
+  },
 });
 
 const weekSchema = new mongoose.Schema({
@@ -41,6 +46,11 @@ const profileSchema = new mongoose.Schema({
     end: Date,
     days: [weekSchema],
     required: true,
+    validate: [
+      function () {
+        return this.begin.getTime() <= this.end.getTime();
+      },
+    ],
   },
   profile_picture: {
     type: Buffer,
