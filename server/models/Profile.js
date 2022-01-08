@@ -47,7 +47,8 @@ const profileSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    maxLength: 20,
+    enum: ['male', 'female', 'other'],
+    lowercase: true,
   },
   birth_date: {
     type: Date,
