@@ -1,5 +1,28 @@
 const mongoose = require("mongoose");
 
+const daySchema = new mongoose.Schema({
+  from: {
+    type: Number,
+    min: 0,
+    max: 2359,
+  },
+  to: {
+    type: Number,
+    min: 0,
+    max: 2359,
+  }
+});
+
+const weekSchema = new mongoose.Schema({
+  mon: daySchema,
+  tues: daySchema,
+  wed: daySchema,
+  thurs: daySchema,
+  fri: daySchema,
+  sat: daySchema,
+  sun: daySchema
+});
+
 const profileSchema = new mongoose.Schema({
   user_username: {
     type: String,
@@ -16,92 +39,7 @@ const profileSchema = new mongoose.Schema({
   availability: {
     begin: Date,
     end: Date,
-    days: {
-      mon: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      tues: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      wed: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      thurs: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      fri: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      sat: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      sun: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-    },
+    days: [weekSchema],
     required: true,
   },
   profile_picture: {
