@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 
 const profileSchema = new mongoose.Schema({
   user_username: {
@@ -129,4 +128,4 @@ const profileSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Profile = mongoose.model("profile", profileSchema);
+module.exports = Profile = mongoose.model("Profile", profileSchema);
