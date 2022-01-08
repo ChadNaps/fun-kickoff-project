@@ -14,13 +14,13 @@ const daySchema = new mongoose.Schema({
 });
 
 const weekSchema = new mongoose.Schema({
-  mon: daySchema,
-  tues: daySchema,
-  wed: daySchema,
-  thurs: daySchema,
-  fri: daySchema,
-  sat: daySchema,
-  sun: daySchema
+  mon: [daySchema],
+  tues: [daySchema],
+  wed: [daySchema],
+  thurs: [daySchema],
+  fri: [daySchema],
+  sat: [daySchema],
+  sun: [daySchema],
 });
 
 const profileSchema = new mongoose.Schema({
