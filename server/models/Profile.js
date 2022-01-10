@@ -2,15 +2,11 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const profileSchema = new mongoose.Schema({
-  user_username: {
+  firstName: {
     type: String,
     required: true,
   },
-  first_name: {
-    type: String,
-    required: true,
-  },
-  last_name: {
+  lastName: {
     type: String,
     required: true,
   },
@@ -105,17 +101,17 @@ const profileSchema = new mongoose.Schema({
     },
     required: true,
   },
-  profile_picture: {
+  profilePicture: {
     type: Buffer,
   },
   gender: {
     type: String,
     maxLength: 20,
   },
-  birth_date: {
+  birthDate: {
     type: Date,
   },
-  phone_number: {
+  phoneNumber: {
     type: String,
     maxLength: 25,
   },
