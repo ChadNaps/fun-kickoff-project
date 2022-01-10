@@ -1,5 +1,32 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+
+const daySchema = new mongoose.Schema({
+  from: {
+    type: Number,
+    min: 0,
+    max: 2359,
+  },
+  to: {
+    type: Number,
+    min: 0,
+    max: 2359,
+    validate: [
+      function (value) {
+        return this.from <= value;
+      },
+    ],
+  },
+});
+
+const weekSchema = new mongoose.Schema({
+  mon: [daySchema],
+  tues: [daySchema],
+  wed: [daySchema],
+  thurs: [daySchema],
+  fri: [daySchema],
+  sat: [daySchema],
+  sun: [daySchema],
+});
 
 const profileSchema = new mongoose.Schema({
   firstName: {
@@ -13,100 +40,21 @@ const profileSchema = new mongoose.Schema({
   availability: {
     begin: Date,
     end: Date,
-    days: {
-      mon: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      tues: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      wed: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      thurs: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      fri: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      sat: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-      sun: {
-        from: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-        to: {
-          type: Number,
-          min: 0,
-          max: 2359,
-        },
-      },
-    },
+    days: [weekSchema],
     required: true,
+    validate: [
+      function () {
+        return this.begin.getTime() <= this.end.getTime();
+      },
+    ],
   },
   profilePicture: {
     type: Buffer,
   },
   gender: {
     type: String,
-    maxLength: 20,
+    enum: ["male", "female", "other"],
+    lowercase: true,
   },
   birthDate: {
     type: Date,
@@ -125,4 +73,4 @@ const profileSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Profile = mongoose.model("profile", profileSchema);
+module.exports = Profile = mongoose.model("Profile", profileSchema);
