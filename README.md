@@ -31,6 +31,12 @@ This is a little description about your project.
 
 ---
 
+### Testing
+1. Go into the server directory `cd server`
+2. Run `npm test` to start the test server, run tests, then close test server
+
+---
+
 ### Demo
 
 1. Registration. Users will be able to create a new account using their email and password
